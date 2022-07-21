@@ -1,0 +1,48 @@
+def caesar_cipher(text, shift_factor = 1)
+  cipher_text = ""
+
+  text.each_char do |char|
+    #loop that goes through string
+    #and gets every character 
+
+    if (char.ord).between?(97, 122)
+      #checks for letters [a-z]
+      cipher_ord = char.ord + shift_factor
+
+      if(cipher_ord > 122) #wraps letter from z-a
+        cipher_ord = cipher_ord - 122 + 96
+
+      elsif(cipher_ord < 97)
+        cipher_ord = cipher_ord + 122 - 96 #wraps letters in reverse from a-z 
+
+      end
+
+      cipher_text += cipher_ord.chr #add cipher text character to the string
+
+    elsif (char.ord).between?(65, 90)
+      #checks for letters [A-Z]
+      cipher_ord = char.ord + shift_factor 
+
+      if(cipher_ord > 90)
+        cipher_ord = cipher_ord - 90 + 64 #wraps letters from A-Z
+
+
+      elsif(cipher_ord < 65)
+        cipher_ord = cipher_ord + 90 - 64 #wraps letters in reverse from A-Z
+      end
+
+      cipher_text += cipher_ord.chr
+     
+    else
+        cipher_text += char #ignores nonalphabetic characters
+    end
+
+  end
+
+p cipher_text 
+end
+
+text = gets.chomp
+shift_factor = gets.chomp.to_i
+
+caesar_cipher(text, shift_factor)
